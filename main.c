@@ -34,12 +34,12 @@ void AnaMenu()
     char secim;
 	    while ( 1 )
 	    {
-	        printf("            TELEFON REHBERÝ v1.0\n");
+	        printf("            TELEFON REHBERÄ° v1.0\n");
 	        printf("          ************************\n\n");
-	        printf("ÝÞLEMLER\n");
-	        printf("1.Kayýt Ekle\n2.Telefonlarý Listele\n3.Kaydý Düzenle\n4.Numara ile Kayýt Bul\n5.Ýsim ile Kayýt Bul\n6.Kayýt Sil\n0.Çýkýþ\n");
+	        printf("Ä°ÅžLEMLER\n");
+	        printf("1.KayÄ±t Ekle\n2.TelefonlarÄ± Listele\n3.KaydÄ± DÃ¼zenle\n4.Numara ile KayÄ±t Bul\n5.Ä°sim ile KayÄ±t Bul\n6.KayÄ±t Sil\n0.Ã‡Ä±kÄ±ÅŸ\n");
 
-	        printf("Seçim:");
+	        printf("SeÃ§im:");
 	        scanf("%s",&secim);
 	            switch(secim)
 	            {
@@ -51,7 +51,7 @@ void AnaMenu()
 	                        break;
 	                case '2':
 	                    KayitListele();
-	                    printf("MENÜYE DÖNMEK ÝÇÝN BÝR TUÞA BASINIZ\n");
+	                    printf("MENÃœYE DÃ–NMEK Ä°Ã‡Ä°N BÄ°R TUÅžA BASINIZ\n");
 	                    getch();
 	                        break;
 	                case '3':
@@ -59,9 +59,13 @@ void AnaMenu()
 	                    break;
 	                case '4':
 	                	NumaraIleKayitBul();
+	                	printf("MENÃœYE DÃ–NMEK Ä°Ã‡Ä°N BÄ°R TUÅžA BASINIZ\n");
+	                    getch();
 	                    break;
 	                case '5':
 	                	IsimIleKayitBul();
+	                	printf("MENÃœYE DÃ–NMEK Ä°Ã‡Ä°N BÄ°R TUÅžA BASINIZ\n");
+	                    getch();
 	                    break;
 	                case '6':
 	                	if(KayitSil()==1)
@@ -70,11 +74,11 @@ void AnaMenu()
 						}
 	                    break;
 	                case '0':
-	                    printf("Uygulamadan çýkýlýyor\n");
+	                    printf("Uygulamadan Ã§Ä±kÄ±lÄ±yor\n");
 	                    fclose(fp);
 	                    exit(1);
 	                default:
-	                    printf("Hatalý seçim\n");
+	                    printf("HatalÄ± seÃ§im\n");
 	                break;
 	        	}
 	    }
@@ -82,42 +86,41 @@ void AnaMenu()
 
 int KayitEkle()
 {
-        fseek(fp,0,SEEK_END);
-        telefon.kayitnumarasi=kayitlimusterisayisi+1;
-        printf("Müþterinin ismini giriniz: ");
-        scanf("%s",telefon.isim);
-        printf("Müþterinin numarasýný giriniz: ");
-        scanf("%ld",&telefon.numara);
-        printf("Müþterinin kodunu giriniz: ");
-        scanf("%ld",&telefon.kod);
-            if(fwrite(&telefon,sizeof(telefon),1,fp)==1)
-            {
-                printf("\nKAYIT BAÞARIYLA EKLENMÝÞTÝR.\n\n");
-                return(1);
-            }
-            else
-            {
-                printf("\nDOSYAYA YAZMA HATASI.!!\n");
-                return(0);
-            }
+	fseek(fp,0,SEEK_END);    
+		telefon.kayitnumarasi=kayitlimusterisayisi+1;
+	    	printf("MÃ¼ÅŸterinin ismini giriniz: ");
+	    	scanf("%s",telefon.isim);
+	        printf("MÃ¼ÅŸterinin numarasÄ±nÄ± giriniz: ");
+	        scanf("%ld",&telefon.numara);
+	        printf("MÃ¼ÅŸterinin kodunu giriniz: ");
+	        scanf("%ld",&telefon.kod);
+	            if(fwrite(&telefon,sizeof(telefon),1,fp)==1)
+	            {
+	                printf("\nKAYIT BAÅžARIYLA EKLENMÄ°ÅžTÄ°R.\n\n");
+	                return(1);
+	            }
+	            else
+	            {
+	                printf("\nDOSYAYA YAZMA HATASI.!!\n");
+	                return(0);
+	            }		        
 }
 
 void KayitListele()
 {
-    int yazdi=0;
     fseek(fp,0,SEEK_SET);
 	    while(fread(&telefonlist,sizeof(telefonlist),1,fp)==1)
 	    {
 			if(telefonlist.kayitnumarasi!=0)
 			{
-			    yazdi++;
-				printf("\nMüþterinin Numarasý:  %ld\n",telefonlist.numara);
-	            printf("Müþterinin Adý:  %s\n",telefonlist.isim);
-	            printf("Müþterinin Kodu:  %ld\n",telefonlist.kod);
+			    bayrak++;
+				printf("\nMÃ¼ÅŸterinin AdÄ±:  %s\n",telefonlist.isim);
+				printf("MÃ¼ÅŸterinin NumarasÄ±:  %ld\n",telefonlist.numara);  
+				printf("MÃ¼ÅŸterinin Kodu:  %ld\n",telefonlist.kod);
 			}
 	    }
-	    if(yazdi==0)
-            printf("Kayýt bulunamadý.\n");
+	    if(bayrak==0)
+            printf("KayÄ±t bulunamadÄ±.\n");
 
 }
 
@@ -129,7 +132,7 @@ void KayitDuzenle()
 
  	rewind(fp);
 
-        printf("Düzenlemek istediðiniz müþterinin ismini giriniz: ");
+        printf("DÃ¼zenlemek istediÄŸiniz mÃ¼ÅŸterinin ismini giriniz: ");
         scanf("%s",musteriadi);
             while(fread(&telefonlist,sizeof(telefonlist),1,fp)==1)
             {
@@ -138,23 +141,23 @@ void KayitDuzenle()
             	if(strcmp(telefonlist.isim,musteriadi)==0)
             	{
             		bayrak++;
-            		printf("Müþterinin yeni ismini giriniz: ");
+            		printf("MÃ¼ÅŸterinin yeni ismini giriniz: ");
             		scanf("%s",telefonlist.isim);
-            		printf("Müþterinin yeni numarasýný giriniz: ");
+            		printf("MÃ¼ÅŸterinin yeni numarasÄ±nÄ± giriniz: ");
             		scanf("%ld",&telefonlist.numara);
-            		printf("Müþterinin yeni kodunu giriniz: ");
+            		printf("MÃ¼ÅŸterinin yeni kodunu giriniz: ");
             		scanf("%ld",&telefonlist.kod);
             		fseek(fp,(konumasistan-1)*sizeof(telefonlist),SEEK_SET);
 
 	            		if(fwrite(&telefonlist,sizeof(telefonlist),1,fp)==1)
 	            		{
-	            			printf("Düzenleme Baþarýlý..");
+	            			printf("DÃ¼zenleme BaÅŸarÄ±lÄ±..");
 	            			break;
 						}
 
 	            		else
 	            		{
-	            			printf("Düzenleme Baþarýsýz..");
+	            			printf("DÃ¼zenleme BaÅŸarÄ±sÄ±z..");
 	            			break;
 						}
 
@@ -162,14 +165,14 @@ void KayitDuzenle()
             }
 			if(bayrak==0)
 			{
-				printf("Müþteri bulunamadý. Tekrar arama yapmak ister misiniz? (E/H)");
+				printf("MÃ¼ÅŸteri bulunamadÄ±. Tekrar arama yapmak ister misiniz? (E/H)");
 	            scanf(" %s",&evet_hayir);
 
 	                if(evet_hayir=='E' || evet_hayir=='e')
 	                    KayitDuzenle();
 	                else if(evet_hayir=='H' || evet_hayir=='h')
 	                {
-	                    printf("Anamenüye yönlendiriliyorsunuz.. ");
+	                    printf("AnamenÃ¼ye yÃ¶nlendiriliyorsunuz.. ");
 	                    AnaMenu();
 	               	}
 			}
@@ -181,29 +184,30 @@ void NumaraIleKayitBul()
 	int musterinumarasi;
 	char evet_hayir;
 	fseek(fp,0,SEEK_SET);
-		printf("Bilgilerini öðrenmek istediðiniz müþterinin numarasýný giriniz: ");
+		printf("Bilgilerini Ã¶ÄŸrenmek istediÄŸiniz mÃ¼ÅŸterinin numarasÄ±nÄ± giriniz: ");
 		scanf("%ld",&musterinumarasi);
 			while(fread(&telefonlist,sizeof(telefonlist),1,fp)==1)
 			{
 				if(musterinumarasi==telefonlist.numara)
 				{
-					printf("Müþteri bulundu bilgileri listeleniyor: \n\n");
-
-						printf("\nMüþterinin Numarasý:  %ld\n",telefonlist.numara);
-			            printf("Müþterinin Adý:  %s\n",telefonlist.isim);
-			            printf("Müþterinin Kodu:  %ld\n",telefonlist.kod);
+					bayrak++;
+						printf("MÃ¼ÅŸteri bulundu bilgileri listeleniyor: \n\n");
+						printf("MÃ¼ÅŸterinin AdÄ±:  %s\n",telefonlist.isim);
+						printf("MÃ¼ÅŸterinin NumarasÄ±:  %ld\n",telefonlist.numara);
+			            printf("MÃ¼ÅŸterinin Kodu:  %ld\n",telefonlist.kod);
+			            break;
 				}
 			}
 			if(bayrak==0)
 			{
-				printf("Müþteri bulunamadý. Tekrar arama yapmak ister misiniz? (E/H)");
+				printf("\nMÃ¼ÅŸteri bulunamadÄ±. Tekrar arama yapmak ister misiniz? (E/H)");
 	            scanf(" %s",&evet_hayir);
 
 	                if(evet_hayir=='E' || evet_hayir=='e')
 	                    NumaraIleKayitBul();
 	                else if(evet_hayir=='H' || evet_hayir=='h')
 	                {
-	                    printf("Anamenüye yönlendiriliyorsunuz.. ");
+	                    printf("AnamenÃ¼ye yÃ¶nlendiriliyorsunuz.. ");
 	                    AnaMenu();
 	               	}
 			}
@@ -214,28 +218,28 @@ void IsimIleKayitBul()
 {
 	rewind(fp);
 	char evet_hayir,musteriara[100];
-		printf("Bulmak istediðiniz müþterinin adýný giriniz: ");
+		printf("Bulmak istediÄŸiniz mÃ¼ÅŸterinin adÄ±nÄ± giriniz: ");
 		scanf("%s",musteriara);
 			while(fread(&telefonlist,sizeof(telefonlist),1,fp)==1)
 		    {
 		    	if(strcmp(musteriara,telefonlist.isim)==0)
 		    	{
-				        printf("\nMüþterinin Numarasý:  %ld\n",telefonlist.numara);
-				        printf("Müþterinin Adý:  %s\n",telefonlist.isim);
-				        printf("Müþterinin Kodu:  %ld\n",telefonlist.kod);
+		    		bayrak++;
+				        printf("\nMÃ¼ÅŸterinin AdÄ±:  %s\n",telefonlist.isim);
+						printf("MÃ¼ÅŸterinin NumarasÄ±:  %ld\n",telefonlist.numara);
+			            printf("MÃ¼ÅŸterinin Kodu:  %ld\n",telefonlist.kod);
 				        break;
 				}
 		    }
 			if(bayrak==0)
 			{
-				printf("Müþteri bulunamadý. Tekrar arama yapmak ister misiniz? (E/H)");
+				printf("MÃ¼ÅŸteri bulunamadÄ±. Tekrar arama yapmak ister misiniz? (E/H)");
 	            scanf(" %s",&evet_hayir);
-
 	                if(evet_hayir=='E' || evet_hayir=='e')
 	                    IsimIleKayitBul();
 	                else if(evet_hayir=='H' || evet_hayir=='h')
 	                {
-	                    printf("Anamenüye yönlendiriliyorsunuz.. ");
+	                    printf("AnamenÃ¼ye yÃ¶nlendiriliyorsunuz.. ");
 	                    AnaMenu();
 	               	}
 			}
@@ -247,7 +251,7 @@ int KayitSil()
 	int konumasistan=0;
 	long int musterikodu;
 	char evet_hayir;
-		printf("Silmek istediðiniz müþterinin kodunu giriniz: ");
+		printf("Silmek istediÄŸiniz mÃ¼ÅŸterinin kodunu giriniz: ");
 		scanf("%ld",&musterikodu);
 
 			while(fread(&telefonlist,sizeof(telefonlist),1,fp)==1)
@@ -263,7 +267,7 @@ int KayitSil()
 					fseek(fp,(konumasistan-1)*sizeof(telefonlist),SEEK_SET);
 					if(fwrite(&telefonlist,sizeof(telefonlist),1,fp)==1)
 					{
-						printf("Silme iþlemi baþarýlý.!\n");
+						printf("\nSilme iÅŸlemi baÅŸarÄ±lÄ±.!\n");
 						return(1);
 						break;
 					}
@@ -271,14 +275,14 @@ int KayitSil()
 			}
 			if(bayrak==0)
 			{
-				printf("Müþteri bulunamadý. Tekrar arama yapmak ister misiniz? (E/H)");
+				printf("MÃ¼ÅŸteri bulunamadÄ±. Tekrar arama yapmak ister misiniz? (E/H)");
 		        scanf("%s",&evet_hayir);
 
 		            if(evet_hayir=='E' || evet_hayir=='e')
 		                KayitSil();
 		            else if(evet_hayir=='H' || evet_hayir=='h')
 		            {
-		                printf("Anamenüye yönlendiriliyorsunuz.. ");
+		                printf("AnamenÃ¼ye yÃ¶nlendiriliyorsunuz.. ");
 		                AnaMenu();
 		            }
 			}
